@@ -43,27 +43,12 @@ class BoswatchPlugin(PluginBase):
         Remove if not implemented"""
         poc_data = self.config.get("pocsag"),
         apicall = urllib.parse.urlencode({
-            "accesskey": self.config.get("accesskey", default=""),
             "title": self.parseWildcards(poc_data.get("title", default="{RIC}({SRICT})\n{MSG}")),
             "ric": self.parseWildcards(poc_data.get("ric", default="")),
             "text": self.parseWildcards(poc_data.get("message", default="{MSG}")),
             "priority": poc_data.get("priority", default="false"),
         })
-        apipath = "/api/alarm"
-        self._makeRequest(apipath, apicall)
         pass
-
-    async def _fetch(self, url, session):
-        """Fetches requests
-
-        @param url: url
-
-        @param session: Clientsession instance"""
-        logging.debug("Post URL: [{}]".format(url))
-        async with session.post(url) as response:
-            logging.info("{} returned [{}]".format(response.url, response.status))
-            return await response.read()
-
 
 conn = http.client.HTTPSConnection("api.pushover.net:443")
 conn.request("POST", "/1/messages.json",

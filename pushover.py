@@ -53,8 +53,8 @@ class BoswatchPlugin(PluginBase):
 conn = http.client.HTTPSConnection("api.pushover.net:443")
 conn.request("POST", "/1/messages.json",
   urllib.parse.urlencode({
-    "token": "a8266pghaesf82yd3kwfjv27h1ijqx",
-    "user": "gtc9wcb585bzm537nfk2188bxgjw8c",
+    "token": "********",
+    "user": "**********",
     "message": text,
     "priority": "2",
     "title": title,
